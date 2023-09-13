@@ -1,9 +1,9 @@
 # First have installed BWA, GATK, and Picard
 
 # Step 1: Align reads to reference genome using BWA - hg38.fa.masked.gz | hg38.fa.gz
-#bwa mem -M -t 4 reference.fasta input.fastq > aligned.sam
+# bwa mem -M -t 4 reference.fasta input.fastq > aligned.sam
 
-bwa mem -M -t 4 hg38/hg38 SRR23019314_Whole_exome_sequence_of_a_patient_with_Harlequin_Ichthyosis_1.fastq SRR23019314_Whole_exome_sequence_of_a_patient_with_Harlequin_Ichthyosis_2.fastq> aligned.sam
+bwa mem -M -t 2 hg38/hg38 SRR23019314_Whole_exome_sequence_of_a_patient_with_Harlequin_Ichthyosis_1.fastq SRR23019314_Whole_exome_sequence_of_a_patient_with_Harlequin_Ichthyosis_2.fastq > aligned.sam
 
 
 # Step 2: Convert SAM to BAM and sort

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: secuencing-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: secuencing-container
+  template:
+    metadata:
+      labels:
+        app: secuencing-container
+    spec:
+      containers:
+        - name: secuencing-container
+          image: gcr.io/mercurial-bruin-268216/pipeline_mock:latest
+apiVersion: v1
+kind: Service
+metadata:
+  name: mi-contenedor-service
+spec:
+  selector:
+    app: mi-contenedor
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer

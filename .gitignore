@@ -1,0 +1,6 @@
+
+#ignorar archivos fastq 
+*.fastq.gz
+*.fa.gz
+*.sam
+/hg38
