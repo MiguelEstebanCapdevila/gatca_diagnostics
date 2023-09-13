@@ -4,3 +4,4 @@
 *.fa.gz
 *.sam
 /hg38
+/data
