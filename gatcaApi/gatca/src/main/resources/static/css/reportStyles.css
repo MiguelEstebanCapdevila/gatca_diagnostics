@@ -1,0 +1,24 @@
+/* Add styles for the table */
+.table {
+    width: 80%; /* Adjust the width as needed */
+    margin: 0 auto; /* Center the table horizontally */
+    border-collapse: collapse; /* Merge table borders */
+}
+
+/* Style table headers */
+.table th {
+    background-color: #007bff; /* Blue background color for headers */
+    color: white; /* White text color for headers */
+    padding: 10px; /* Padding for headers */
+}
+
+/* Style table cells */
+.table td {
+    border: 1px solid #ddd; /* Add border to cells */
+    padding: 8px; /* Padding for cells */
+}
+
+/* Add hover effect to table rows */
+.table tbody tr:hover {
+    background-color: #f5f5f5; /* Gray background on hover */
+}

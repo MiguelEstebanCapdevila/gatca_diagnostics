@@ -5,3 +5,6 @@
 *.sam
 /hg38
 /data
+/gatcaApi/.idea
+/gatcaApi/gatca/.gradle
+/gatcaApi/gatca/.build

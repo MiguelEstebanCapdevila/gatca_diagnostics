@@ -1,0 +1,136 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Your Table</title>
+    <!-- Link to your CSS file -->
+    <!-- TODO check how to add css file error Caused by: org.attoparser.ParseException: Link base "/css/reportStyles.css" cannot be context relative (/...) unless the context used for executing the engine implements the org.thymeleaf.context.IWebContext interface (template: "report" - line 8, col 44)
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reportStyles.css}">
+    -->
+
+    <style>
+        /* Container for the header elements */
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Style for the logo */
+        .logo {
+            width: 70px;
+            height: 70px;
+            float: right;
+            margin-top: -50px;
+        }
+
+        /* Style for the date */
+        .date {
+            float: left;
+            margin-top: 20px
+        }
+
+        /* Style for the title */
+        .title {
+            text-align: center;
+            margin-top: 40px
+            }
+
+
+        /* Style for the PDF container */
+        .table-container {
+            text-align: center; /* Center-align content within the container */
+        }
+
+        /* Style for the table */
+        .table {
+            width: 80%;
+            margin: 0 auto; /* Center-align the table horizontally */
+            border-collapse: collapse;
+            margin-top: 30px;
+            font-family: Arial, sans-serif; /* Specify a font for the table */
+        }
+
+
+             /* Style for table headers */
+        .table th {
+            color: #ffffff;
+            font-weight: normal;
+            background-color: #8f8f8f;
+            border-bottom: solid 2px #d8d8d8;
+            position: sticky;
+            top: 0;
+        }
+
+        /* Style for table rows */
+        .table tr:nth-child(even) {
+            background-color: #f2f2f2; /* Alternating row background color */
+        }
+
+        /* Style for table cells */
+        .table td {
+            border: 1px solid #ddd; /* Add cell borders */
+            padding: 8px;
+        }
+
+
+
+    </style>
+</head>
+<body>
+<!-- Header container -->
+<div class="header">
+    <!-- Date on the top left, under the logo vertically -->
+
+
+    <!-- Logo on the top right -->
+    <img th:src="@{'data:image/jpeg;base64,'+${logo}}" class="logo" alt="logo" />
+
+    <div class="date">
+        <span th:if="${currentDate == null or currentDate == ''}" th:text="Placeholder Text"></span>
+        <span th:unless="${currentDate == null or currentDate == ''}" th:text="${currentDate}"></span>
+    </div>
+
+</div>
+
+<!-- Title in the center -->
+<h2 th:text="${title}" class="title"></h2>
+
+    <!-- general patient data not done yet -->
+    <br></br><br></br>
+
+
+    <span style="margin-bottom: 20px;">Resultados</span>
+
+  <!--  <p>Los resultados obtenidos con el qCarrier Plus Test indican que la probando es portadora de mutaciones en los
+        genes implicados en las enfermedades que detallamos en la siguiente tabla.</p>
+-->
+<div class="table-container">
+
+
+    <table class="table"  >
+        <thead>
+        <tr>
+            <th> Cromosoma </th>
+            <th> Posición </th>
+            <th> Referencia </th>
+            <th> Alternancia </th>
+            <th> Calidad </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="gen : ${genomicData}">
+            <td th:text="${gen.chromosoma}"></td>
+            <td th:text="${gen.position}"></td>
+            <td th:text="${gen.reference}"></td>
+            <td th:text="${gen.alternance}"></td>
+            <td th:text="${gen.quality}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
