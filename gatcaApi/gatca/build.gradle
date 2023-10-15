@@ -40,6 +40,16 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' // Add Thymeleaf
 	implementation 'org.xhtmlrenderer:flying-saucer-pdf-itext5:9.1.22'
 	implementation 'org.xhtmlrenderer:flying-saucer-core:9.1.22'
+	implementation 'org.springframework.kafka:spring-kafka'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.postgresql:postgresql'
+	implementation group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
+	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
+	implementation group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
+	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
+	implementation 'org.slf4j:slf4j-api:2.0.7'
+	implementation 'ch.qos.logback:logback-classic:1.4.8'
+
 
 
 }

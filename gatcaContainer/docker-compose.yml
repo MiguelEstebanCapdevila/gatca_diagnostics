@@ -1,0 +1,12 @@
+version: '3'
+services:
+  myapp:
+    image: gatca
+    deploy:
+      resources:
+        limits:
+          memory: 28G
+    volumes:
+      - ./reference_data:/app/reference_data
+      - ./data:/app/data
+      - ./snpEff:/app/data

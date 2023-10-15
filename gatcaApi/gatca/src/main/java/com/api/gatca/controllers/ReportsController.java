@@ -1,13 +1,12 @@
 package com.api.gatca.controllers;
 
 import com.api.gatca.models.ReportData;
+import com.api.gatca.services.impl.FetchFileDataServiceImpl;
 import com.api.gatca.services.FetchFileDataService;
-import com.api.gatca.services.IFetchFileDataService;
-import com.api.gatca.services.IReportService;
 import com.api.gatca.services.ReportService;
+import com.api.gatca.services.impl.ReportServiceImpl;
 import com.itextpdf.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,21 +17,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
 
 @RestController
 @RequestMapping("/api/reports")
 public class ReportsController {
 
-    private final ReportService reportService;
-    private final FetchFileDataService fetchFileDataService;
+    private final ReportServiceImpl reportServiceImpl;
+    private final FetchFileDataServiceImpl fetchFileDataServiceImpl;
     @Autowired
-    public ReportsController(IReportService reportService, IFetchFileDataService fetchFileDataService){
-        this.reportService = (ReportService) reportService;
-        this.fetchFileDataService = (FetchFileDataService) fetchFileDataService;
+    public ReportsController(ReportService reportService, FetchFileDataService fetchFileDataService){
+        this.reportServiceImpl = (ReportServiceImpl) reportService;
+        this.fetchFileDataServiceImpl = (FetchFileDataServiceImpl) fetchFileDataService;
     }
 
     //TODO
@@ -65,9 +62,9 @@ public class ReportsController {
                 file.transferTo(uploadedFile);
 
                 //prepare data
-                var genomicData = fetchFileDataService.getGenomicDataFromFile(uploadedFile);
+                var genomicData = fetchFileDataServiceImpl.getGenomicDataFromFile(uploadedFile);
                 //TODO no hardcodearlo
-                var report = reportService.generateReport(genomicData,new ReportData("SNV","C:\\GATCA\\logo-report.png",
+                var report = reportServiceImpl.generateReport(genomicData,new ReportData("SNV","C:\\GATCA\\logo-report.png",
                         "soy el parágrafo legal \n bla bla bla \n bla bla bla"));
 
 
@@ -79,23 +76,7 @@ public class ReportsController {
 
                 return new ResponseEntity<>(report.toByteArray(), headers, HttpStatus.OK);
 
-/*
-                // Create a ByteArrayResource from the bytes
-                ByteArrayResource resource = new ByteArrayResource(report);
 
-                // Build HTTP headers for the response
-                HttpHeaders headers = new HttpHeaders();
-                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=your-file.pdf");
-
-                // Set the content type as PDF
-                headers.setContentType(MediaType.APPLICATION_PDF);
-
-                // Return a ResponseEntity with the PDF bytes, headers, and status code
-                return ResponseEntity.ok()
-                        .headers(headers)
-                        .contentLength(report.length)
-                        .body(resource);
-*/
             } catch (IOException e) {
                 e.printStackTrace();
                 return new ResponseEntity<>( HttpStatus.INTERNAL_SERVER_ERROR);

@@ -1,10 +1,2 @@
-
-#ignorar archivos fastq 
-*.fastq.gz
-*.fa.gz
-*.sam
-/hg38
-/data
-/gatcaApi/.idea
-/gatcaApi/gatca/.gradle
-/gatcaApi/gatca/.build
+idea/
+reference_data

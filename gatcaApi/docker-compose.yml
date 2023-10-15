@@ -1,0 +1,11 @@
+version: '3'
+services:
+  postgres:
+    image: postgres
+    container_name: my_postgres
+    environment:
+      POSTGRES_DB: gatca
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test12345
+    ports:
+      - "5432:5432"
